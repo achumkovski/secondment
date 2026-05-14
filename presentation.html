@@ -700,9 +700,8 @@ html,body{width:100%;height:100%;overflow:hidden;background:var(--navy);font-fam
         <div class="wm-pill" id="wmp0"><div class="wm-badge">🏥</div><div><div class="wm-pill-title">EBOS, Cochlear, Sonic</div><div class="wm-pill-sub">Complex multi-stakeholders, demanding executives — found a way through every time.</div></div></div>
         <div class="wm-pill" id="wmp1"><div class="wm-badge">🤝</div><div><div class="wm-pill-title">Coaching SEs doesn't feel like work to me</div><div class="wm-pill-sub">It energises me.</div></div></div>
         <div class="wm-pill" id="wmp2"><div class="wm-badge">🗺️</div><div><div class="wm-pill-title">Before anyone asked, I'd already mapped the transition</div><div class="wm-pill-sub">Four accounts, four SEs.</div></div></div>
-        <div class="wm-pill" id="wmp3"><div class="wm-badge">🎯</div><div><div class="wm-pill-title">Complex, multi-stakeholder pursuits end to end</div><div class="wm-pill-sub">I know what it takes.</div></div></div>
-        <div class="wm-pill" id="wmp4"><div class="wm-badge">👂</div><div><div class="wm-pill-title">My initiatives reflect what SEs here have actually been asking for</div><div class="wm-pill-sub">I listened first.</div></div></div>
-        <div class="wm-pill" id="wmp5"><div class="wm-badge">🚀</div><div><div class="wm-pill-title">Start Fast</div><div class="wm-pill-sub">I'm already part of the team.</div></div></div>
+        <div class="wm-pill" id="wmp3"><div class="wm-badge">👂</div><div><div class="wm-pill-title">My initiatives reflect what SEs here have actually been asking for</div><div class="wm-pill-sub">I listened first.</div></div></div>
+        <div class="wm-pill" id="wmp4"><div class="wm-badge">🚀</div><div><div class="wm-pill-title">Start Fast</div><div class="wm-pill-sub">I'm already part of the team.</div></div></div>
       </div>
       <p class="wm-footer" style="margin-top:auto;text-align:left;">Aleksandar Chumkovski – Principal Account SE, Enterprise HLS – May 2026</p>
     </div>
@@ -1055,7 +1054,7 @@ function initS15(){
 
 /* ─── SLIDE 12 — WHY ME ──────────────────────────────── */
 function initS12(){
-  var pills = [0,1,2,3,4,5].map(function(i){ return document.getElementById('wmp'+i); });
+  var pills = [0,1,2,3,4].map(function(i){ return document.getElementById('wmp'+i); });
   var prompt = document.getElementById('wm-prompt');
   var mic = document.getElementById('wm-mic');
   var micRevealed = false;

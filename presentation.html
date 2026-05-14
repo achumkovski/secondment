@@ -1,0 +1,1114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Built to Lead. Ready Now. — Aleksandar Chumkovski</title>
+<style>
+@font-face{font-family:'Salesforce Sans';font-weight:300;font-display:swap;src:url('assets/fonts/SalesforceSans-Light.woff2') format('woff2');}
+@font-face{font-family:'Salesforce Sans';font-weight:400;font-display:swap;src:url('assets/fonts/SalesforceSans-Regular.woff2') format('woff2');}
+@font-face{font-family:'Salesforce Sans';font-weight:400;font-style:italic;font-display:swap;src:url('assets/fonts/SalesforceSans-Italic.woff2') format('woff2');}
+@font-face{font-family:'Salesforce Sans';font-weight:600;font-display:swap;src:url('assets/fonts/SalesforceSans-Semibold.woff2') format('woff2');}
+@font-face{font-family:'Salesforce Sans';font-weight:700;font-display:swap;src:url('assets/fonts/SalesforceSans-Bold.woff2') format('woff2');}
+@font-face{font-family:'Avant Garde For Salesforce';font-weight:600;font-display:swap;src:url('assets/fonts/AvantGardeForSalesforceW05-Dm.woff2') format('woff2'),url('assets/fonts/AvantGardeForSalesforce-Demi.ttf') format('truetype');}
+
+:root{
+  --navy:#001E5B;--blue:#022AC0;--blue-m:#066AFE;--blue-l:#00B3FF;--cloud80:#90D0FE;
+  --grad:linear-gradient(135deg,#001E5B 0%,#022AC0 42%,#066AFE 74%,#00B3FF 100%);
+  --white:#fff;--teal:#06A59A;
+  --fd:'Avant Garde For Salesforce','Salesforce Sans',system-ui,sans-serif;
+  --fb:'Salesforce Sans',system-ui,sans-serif;
+  --card-bg:rgba(2,42,192,0.28);--card-border:rgba(0,179,255,0.22);
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html,body{width:100%;height:100%;overflow:hidden;background:var(--navy);font-family:var(--fb);-webkit-font-smoothing:antialiased;}
+
+/* DECK */
+#deck{width:100vw;height:100vh;position:relative;overflow:hidden;}
+.slide{position:absolute;inset:0;background:var(--grad);opacity:0;pointer-events:none;transition:opacity 400ms ease-in-out;display:flex;flex-direction:column;overflow:hidden;}
+.slide.active{opacity:1;pointer-events:all;}
+.si{flex:1;padding:62px 44px 76px;display:flex;flex-direction:column;min-height:0;position:relative;}
+.si.bc{padding-top:76px;}
+
+/* LOGO PILL */
+#lp{position:fixed;top:16px;right:18px;background:#fff;border-radius:14px;box-shadow:0 2px 16px rgba(0,30,91,0.2);display:flex;align-items:center;height:48px;padding:0 14px 0 10px;z-index:200;gap:0;}
+#lp img{height:30px;width:auto;display:block;}
+#lp .lpd{width:1px;height:24px;background:rgba(0,30,91,0.15);margin:0 10px;}
+#lp .lpt{font-size:15px;font-weight:700;color:var(--navy);white-space:nowrap;}
+
+/* NAV */
+#nav{position:fixed;bottom:20px;left:0;right:0;display:flex;align-items:center;justify-content:center;gap:14px;z-index:200;}
+.nb{width:40px;height:40px;border-radius:50%;border:1.5px solid rgba(255,255,255,0.3);background:rgba(255,255,255,0.07);color:#fff;font-size:22px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all 300ms;}
+.nb:hover{background:rgba(0,179,255,0.18);border-color:var(--blue-l);}
+.nb:disabled{opacity:0.2;cursor:default;}
+#dots{display:flex;gap:6px;align-items:center;}
+.dot{width:7px;height:7px;border-radius:50%;background:rgba(255,255,255,0.28);cursor:pointer;transition:all 300ms;}
+.dot.active{background:var(--blue-l);width:20px;border-radius:4px;}
+#ctr{position:fixed;bottom:24px;right:26px;font-size:15px;color:rgba(255,255,255,0.4);font-weight:600;letter-spacing:0.04em;z-index:200;}
+
+/* BREADCRUMB */
+.bc-wrap{position:absolute;top:24px;left:40px;z-index:10;}
+.bc1{font-size:15px;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:var(--blue-l);display:block;margin-bottom:3px;}
+.bc2{font-size:15px;font-weight:600;letter-spacing:0.10em;text-transform:uppercase;color:rgba(255,255,255,0.65);display:block;}
+
+/* TYPOGRAPHY */
+.h{font-family:var(--fd);font-weight:600;color:#fff;line-height:1.1;letter-spacing:-0.02em;}
+.h em{font-style:normal;color:var(--blue-l);}
+.eyebrow{font-size:15px;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:var(--blue-l);margin-bottom:12px;display:block;}
+.anchor{font-style:italic;color:var(--blue-l);font-size:22px;font-weight:400;line-height:1.65;text-align:center;}
+.muted{color:rgba(255,255,255,0.6);font-size:18px;font-style:italic;}
+
+/* CARD */
+.dc{background:var(--card-bg);border:1px solid var(--card-border);border-radius:8px;padding:18px 20px;}
+.dc-title{font-size:18px;font-weight:700;color:#fff;margin-bottom:7px;}
+.dc-body{font-size:18px;color:rgba(255,255,255,0.68);line-height:1.65;}
+.dc-body strong{color:#fff;}
+.dc:hover{border-color:rgba(0,179,255,0.5);}
+
+/* KPI CARD */
+.kpi-dc{background:rgba(2,42,192,0.25);border:1px solid rgba(6,106,254,0.4);border-left:3px solid var(--blue-l);border-radius:4px;padding:14px 16px;}
+.kpi-val{font-size:36px;font-weight:700;color:#fff;line-height:1;letter-spacing:-0.02em;}
+.kpi-val span{color:#fff;font-size:36px;}
+.kpi-lbl{font-size:16px;color:var(--blue-l);margin-top:5px;line-height:1.4;}
+
+/* TIMELINE */
+.tl-row{display:flex;gap:12px;opacity:0;transform:translateX(-14px);transition:opacity 400ms,transform 400ms;}
+.tl-row.show{opacity:1;transform:none;}
+.tl-spine{display:flex;flex-direction:column;align-items:center;flex-shrink:0;width:48px;}
+.tl-dot{width:48px;height:48px;border-radius:50%;background:rgba(2,42,192,0.4);border:2px solid rgba(0,179,255,0.35);display:flex;align-items:center;justify-content:center;font-size:24px;flex-shrink:0;transition:border-color 400ms;}
+.tl-row.show .tl-dot{border-color:var(--blue-l);}
+.tl-line{width:2px;height:24px;flex-shrink:0;background:rgba(0,179,255,0.22);position:relative;}
+.tl-row:last-child .tl-line{display:none;}
+.tl-travel{position:fixed;width:8px;height:8px;border-radius:50%;background:#00C4E0;box-shadow:0 0 10px 3px rgba(0,196,224,0.7),0 0 4px 1px #fff;pointer-events:none;z-index:50;transform:translate(-50%,-50%);transition:none;}
+.tl-content{padding:2px 0 3px;}
+.tl-label{font-size:20px;font-weight:700;color:#fff;margin-bottom:2px;}
+.tl-desc{font-size:16px;color:rgba(255,255,255,0.58);line-height:1.45;}
+
+/* KPI BIG (slide 8 result) */
+.kb{background:rgba(2,42,192,0.25);border:1px solid rgba(6,106,254,0.4);border-left:3px solid var(--blue-l);border-radius:4px;padding:12px 14px;text-align:center;opacity:0;transform:translateY(12px);transition:opacity 400ms,transform 400ms;}
+.kb.show{opacity:1;transform:none;}
+.kb .kn{font-size:30px;font-weight:700;color:var(--blue-l);line-height:1;}
+.kb .kl{font-size:15px;color:rgba(255,255,255,0.5);margin-top:3px;}
+
+/* FLIP CARD */
+.fc{width:86px;height:98px;perspective:700px;cursor:pointer;flex-shrink:0;position:relative;z-index:1;}
+.fc:hover,.fc.flipped{z-index:30;}
+.fi{width:100%;height:100%;position:relative;transform-style:preserve-3d;transition:transform 600ms ease-in-out;}
+.fc.flipped .fi{transform:rotateY(180deg);}
+.ff{position:absolute;inset:0;backface-visibility:hidden;-webkit-backface-visibility:hidden;border-radius:8px;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:7px;text-align:center;background:rgba(2,42,192,0.35);border:1.5px solid rgba(0,179,255,0.28);transition:border-color 300ms,box-shadow 300ms;}
+.fc:hover .ff,.fc.flipped .ff{border-color:var(--blue-l);box-shadow:0 0 10px rgba(0,179,255,0.28);}
+.fb-card{position:absolute;top:-20px;left:50%;transform:translateX(-50%) rotateY(180deg);backface-visibility:hidden;-webkit-backface-visibility:hidden;background:rgba(0,20,70,0.97);border:1.5px solid var(--blue-l);border-radius:10px;width:198px;padding:13px;display:flex;flex-direction:column;box-shadow:0 8px 32px rgba(0,0,0,0.55);z-index:50;}
+.fsn{font-size:22px;font-weight:700;color:var(--blue-l);}
+.fst{font-size:15px;font-weight:600;color:rgba(255,255,255,0.88);line-height:1.3;margin-top:2px;}
+.fss{font-size:15px;color:var(--blue-l);}
+.bk-title{font-size:15px;font-weight:700;color:var(--blue-l);margin-bottom:6px;}
+.bk-ul{list-style:none;padding:0;flex:1;}
+.bk-ul li{font-size:15px;color:rgba(255,255,255,0.85);line-height:1.45;margin-bottom:3px;padding-left:9px;position:relative;}
+.bk-ul li::before{content:'·';position:absolute;left:1px;color:var(--blue-l);}
+.bk-anc{font-size:15px;font-style:italic;color:var(--blue-l);margin-top:5px;font-weight:600;line-height:1.4;}
+
+/* CONFIDENCE PILL — base (scoped overrides in Slide 7 block below) */
+.cc{display:flex;align-items:center;justify-content:center;text-align:center;transition:all 400ms ease-in-out;}
+.cc-lbl{font-size:14px;font-weight:700;color:var(--blue-l);line-height:1;white-space:nowrap;}
+
+/* REVEAL POINT */
+.rp{display:flex;gap:11px;align-items:flex-start;padding:10px 14px;background:rgba(2,42,192,0.2);border:1px solid rgba(0,179,255,0.15);border-radius:6px;font-size:18px;color:rgba(255,255,255,0.85);line-height:1.55;opacity:0;transform:translateX(-10px);transition:opacity 400ms,transform 400ms;}
+.rp.show{opacity:1;transform:none;}
+.rp-num{font-size:22px;font-weight:700;color:var(--blue-l);flex-shrink:0;line-height:1.2;min-width:22px;}
+
+/* EVIDENCE CARD */
+.ec{flex:1;background:var(--card-bg);border:1px solid var(--card-border);border-radius:8px;padding:16px;cursor:pointer;overflow:hidden;transition:all 300ms;}
+.ec:hover,.ec.open{border-color:rgba(0,179,255,0.5);}
+.ec.open{background:rgba(2,42,192,0.42);}
+.ec-head{display:flex;gap:10px;align-items:center;margin-bottom:6px;}
+.ec-icon{font-size:22px;}
+.ec-title{font-size:18px;font-weight:700;color:#fff;}
+.ec-detail{font-size:15px;color:rgba(255,255,255,0.65);line-height:1.6;max-height:0;overflow:hidden;transition:max-height 400ms,opacity 400ms;opacity:0;}
+.ec.open .ec-detail{max-height:100px;opacity:1;}
+
+/* ACCOUNT CARD */
+.ac{background:var(--card-bg);border:1px solid var(--card-border);border-radius:8px;padding:14px 16px;position:relative;opacity:0;transform:scale(0.97);transition:opacity 400ms,transform 400ms;}
+.ac.show{opacity:1;transform:none;}
+.keen{position:absolute;top:10px;right:10px;font-size:15px;font-weight:700;padding:3px 8px;border-radius:4px;background:rgba(6,165,154,0.15);color:var(--teal);border:1px solid rgba(6,165,154,0.3);}
+.ac-name{font-size:18px;font-weight:700;color:#fff;margin-bottom:2px;}
+.ac-se{font-size:15px;color:var(--blue-l);font-weight:600;margin-bottom:5px;}
+.ac-body{font-size:15px;color:rgba(255,255,255,0.62);line-height:1.5;list-style:none;padding:0;display:flex;flex-direction:column;gap:3px;}
+.ac-body li{padding-left:12px;position:relative;}
+.ac-body li::before{content:'·';position:absolute;left:0;color:var(--blue-l);}
+
+/* CONF DIAGNOSTIC */
+.cdp{display:flex;align-items:center;gap:10px;padding:8px 14px;border-radius:6px;font-size:15px;font-weight:600;}
+.cdp.ok{background:rgba(0,179,255,0.12);border:1px solid rgba(0,179,255,0.28);color:var(--blue-l);}
+.cdp.no{background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.09);color:rgba(255,255,255,0.38);}
+.cdc{width:20px;height:20px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:15px;font-weight:700;flex-shrink:0;}
+.cdp.ok .cdc{background:rgba(0,179,255,0.2);color:var(--blue-l);}
+.cdp.no .cdc{background:rgba(255,255,255,0.06);color:rgba(255,255,255,0.3);}
+
+
+/* TRAIT CARD */
+.trait{background:var(--card-bg);border:1px solid var(--card-border);border-radius:8px;padding:12px 14px;cursor:pointer;transition:border-color 300ms;}
+.trait:hover{border-color:rgba(0,179,255,0.48);}
+.trait-h{display:flex;align-items:center;gap:7px;font-size:15px;font-weight:700;color:#fff;}
+.trait-b{font-size:15px;color:rgba(255,255,255,0.62);line-height:1.5;max-height:0;overflow:hidden;transition:max-height 400ms,opacity 400ms;opacity:0;margin-top:0;}
+.trait.open .trait-b{max-height:50px;opacity:1;margin-top:5px;}
+
+/* VALUE CARD */
+.vc{flex:1;background:var(--card-bg);border:1px solid var(--card-border);border-radius:8px;padding:18px;text-align:center;opacity:0;transform:translateY(12px);transition:opacity 400ms,transform 400ms;}
+.vc.show{opacity:1;transform:none;}
+.vc-icon{font-size:30px;margin-bottom:7px;}
+.vc-lbl{font-size:18px;font-weight:700;color:#fff;}
+
+/* OPP CARD */
+.opp{background:var(--card-bg);border:1px solid var(--card-border);border-radius:8px;padding:16px;opacity:0;transform:translateY(14px);transition:opacity 400ms,transform 400ms;}
+.opp.show{opacity:1;transform:none;}
+.opp:hover{border-color:rgba(0,179,255,0.48);}
+.opp-icon{font-size:30px;margin-bottom:7px;}
+.opp-title{font-size:18px;font-weight:700;color:#fff;margin-bottom:5px;}
+.opp-body{font-size:18px;color:rgba(255,255,255,0.65);line-height:1.6;}
+
+/* PILL BADGE */
+.pb{display:inline-block;font-size:15px;font-weight:700;letter-spacing:0.07em;text-transform:uppercase;padding:3px 9px;border-radius:20px;background:rgba(0,179,255,0.1);border:1px solid rgba(0,179,255,0.3);color:var(--blue-l);}
+
+/* FOCUS TAG */
+.ft{display:inline-flex;align-items:center;gap:5px;font-size:15px;font-weight:600;color:var(--blue-l);border:1px solid rgba(0,179,255,0.28);border-radius:20px;padding:5px 13px;}
+
+/* HYP POINT */
+.hp{font-size:18px;color:rgba(255,255,255,0.72);line-height:1.6;padding:9px 13px;border-left:2px solid rgba(0,179,255,0.3);margin-bottom:7px;opacity:0;transform:translateX(10px);transition:opacity 400ms,transform 400ms;}
+.hp.show{opacity:1;transform:none;}
+/* SLIDE 13 TILE */
+.s13-tile{background:rgba(2,42,192,0.25);border:1px solid rgba(0,179,255,0.22);border-radius:10px;padding:14px 24px;font-size:18px;color:rgba(255,255,255,0.85);text-align:center;line-height:1.55;}
+
+/* CONTEXT STRIP */
+.ctx{background:rgba(255,255,255,0.04);border-left:3px solid rgba(0,179,255,0.4);padding:10px 16px;font-size:18px;color:rgba(255,255,255,0.68);font-style:italic;line-height:1.6;border-radius:0 6px 6px 0;margin-bottom:14px;}
+
+/* CLOSING PHRASES */
+.cp-tile{flex:1;background:rgba(255,255,255,0.08);border:1px solid rgba(0,179,255,0.2);border-radius:12px;padding:24px;display:flex;align-items:center;justify-content:center;opacity:0;transform:translateY(10px);transition:opacity 600ms,transform 600ms;}
+.cp-tile.show{opacity:1;transform:none;}
+.cp{font-size:22px;font-style:italic;color:rgba(255,255,255,0.88);line-height:1.6;text-align:center;}
+
+
+/* WHY ME PILLS (slide 12) */
+@keyframes wmSlideIn{from{opacity:0;transform:translateX(-28px);}to{opacity:1;transform:none;}}
+.wm-pill{display:flex;align-items:center;gap:18px;background:rgba(2,42,192,0.28);border:1px solid rgba(0,179,255,0.28);border-radius:999px;padding:16px 28px 16px 16px;opacity:0;pointer-events:none;}
+.wm-pill.show{animation:wmSlideIn 0.4s ease forwards;pointer-events:auto;}
+.wm-badge{width:52px;height:52px;border-radius:50%;background:rgba(0,179,255,0.15);border:1px solid rgba(0,179,255,0.35);display:flex;align-items:center;justify-content:center;font-size:26px;flex-shrink:0;}
+.wm-pill-title{font-size:18px;font-weight:700;color:#fff;margin-bottom:3px;line-height:1.2;}
+.wm-pill-sub{font-size:14px;color:var(--blue-l);line-height:1.4;}
+@keyframes wmPromptPulse{0%,100%{opacity:0.4;}50%{opacity:1;}}
+.wm-prompt{display:flex;align-items:center;gap:8px;cursor:pointer;width:fit-content;margin:0 auto;animation:wmPromptPulse 1.4s ease-in-out infinite;}
+.wm-prompt-ch{font-size:26px;font-weight:700;color:#00C4E0;line-height:1;}
+.wm-prompt-lbl{font-size:13px;color:rgba(255,255,255,0.5);letter-spacing:0.05em;}
+.wm-mic{width:100%;background:var(--blue-m);border-radius:14px;padding:24px 36px;font-size:19px;font-style:italic;color:#fff;text-align:center;line-height:1.7;opacity:0;transition:opacity 500ms;display:none;}
+.wm-mic.show{display:block;opacity:1;}
+.wm-footer{font-size:13px;color:rgba(255,255,255,0.38);text-align:center;margin-top:auto;padding-top:14px;}
+
+/* SLIDE 6/7/8 TILE ANIMATIONS */
+.s6-tile,.s8-tile{opacity:0;transition:opacity 400ms ease;}
+.s6-tile.show,.s8-tile.show{opacity:1;}
+.s8-tile{transform:scale(0.85);transition:opacity 400ms ease-out,transform 400ms ease-out;}
+.s8-tile.show{transform:scale(1);}
+.s7-tile{opacity:0;transition:opacity 400ms ease,transform 400ms ease;}
+.s7-tile.show{opacity:1;transform:none !important;}
+@keyframes qChevPulse{0%,100%{opacity:0.35;}50%{opacity:1;}}
+.q-chev{position:fixed;font-size:36px;font-weight:700;color:#00C4E0;pointer-events:none;transform:translate(-50%,-50%);animation:qChevPulse 1.4s ease-in-out infinite;z-index:60;line-height:1;}
+
+/* SCENE CARD */
+.sc{flex:1;background:var(--card-bg);border:1px solid var(--card-border);border-radius:8px;padding:18px;opacity:0;transform:translateY(16px);transition:opacity 500ms,transform 500ms;}
+.sc.show{opacity:1;transform:none;}
+.sc-icon{font-size:30px;margin-bottom:8px;}
+.sc-title{font-size:18px;font-weight:700;color:var(--blue-l);margin-bottom:6px;}
+.sc-body{font-size:18px;color:rgba(255,255,255,0.68);line-height:1.6;}
+
+/* AGENDA */
+.ag-item{display:flex;align-items:center;gap:18px;padding:14px 20px;background:var(--card-bg);border:1px solid var(--card-border);border-radius:8px;opacity:0;transform:translateY(10px);transition:opacity 400ms,transform 400ms;}
+.ag-item.show{opacity:1;transform:none;}
+.ag-num{font-size:30px;font-weight:700;color:var(--blue-l);min-width:40px;line-height:1;}
+.ag-name{font-size:22px;font-weight:700;color:#fff;}
+
+
+/* click hint — replaces pulse on interactive elements */
+.click-hint{font-size:11px;color:rgba(255,255,255,0.32);display:block;text-align:center;margin-top:4px;letter-spacing:0.02em;}
+.ff::after{content:'› flip';font-size:10px;color:rgba(255,255,255,0.3);display:block;text-align:center;margin-top:3px;}
+
+.comm-row{display:flex;align-items:center;gap:8px;flex-wrap:wrap;font-size:15px;color:rgba(255,255,255,0.6);}
+
+/* SLIDE 9 */
+@keyframes dotPulse{0%,100%{box-shadow:0 0 0 3px rgba(0,196,224,0.3);}50%{box-shadow:0 0 0 7px rgba(0,196,224,0.7);}}
+.s9dot{position:absolute;width:44px;height:44px;border-radius:50%;background:#1a2ea0;border:2px solid rgba(255,255,255,0.3);display:flex;align-items:center;justify-content:center;font-size:20px;cursor:pointer;z-index:10;pointer-events:all;transform:translate(-50%,50%);transition:border-color 300ms,box-shadow 300ms;user-select:none;}
+.s9dot.active{border-color:#00C4E0;box-shadow:0 0 14px rgba(0,196,224,0.7);}
+.s9dot.dot-next{animation:dotPulse 1.4s ease-in-out infinite;border:2px solid #00C4E0;}
+.s9tile{position:absolute;width:178px;opacity:0;transition:opacity 0.4s ease;z-index:20;background:rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.22);border-radius:8px;padding:11px 12px;color:#fff;}
+</style>
+</head>
+<body>
+
+<div id="deck">
+
+<!-- SLIDE 1 — TITLE -->
+<div class="slide active" id="s1">
+  <div class="si" style="justify-content:flex-end;padding-bottom:120px;">
+    <div style="margin-bottom:24px;">
+      <img src="assets/logos/Salesforce-Corporate-Logo-Horiz-White-RGB.svg" width="200" height="36" alt="Salesforce" style="display:block;margin-bottom:28px;opacity:0.92;">
+      <span style="font-size:15px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--blue-l);display:block;margin-bottom:18px;">SECONDMENT PANEL PRESENTATION · PRINCIPAL ACCOUNT SE</span>
+      <h1 class="h" style="font-size:74px;margin-bottom:20px;">The Collective<br>Beats the Individual.<br><em>Every Time.</em></h1>
+      <p style="font-size:30px;font-style:italic;color:var(--blue-l);margin-bottom:8px;">Aleksandar Chumkovski</p>
+      <p style="font-size:18px;color:rgba(255,255,255,0.5);">May 2026</p>
+    </div>
+  </div>
+</div>
+
+<!-- SLIDE 2 — THANK YOU -->
+<div class="slide" id="s2">
+  <div class="si" style="align-items:center;justify-content:center;gap:36px;">
+    <h1 style="font-family:var(--fd);font-size:97px;font-weight:600;color:#fff;letter-spacing:-0.02em;">Thank You.</h1>
+    <div style="display:flex;gap:32px;align-items:flex-start;justify-content:center;">
+      <div style="display:flex;flex-direction:column;align-items:center;gap:10px;">
+        <img src="https://ca.slack-edge.com/E7T5PNK3P-U01GE8V48KW-c205c245f8cc-512" alt="" style="width:96px;height:96px;border-radius:50%;object-fit:cover;border:2px solid rgba(0,179,255,0.5);">
+      </div>
+      <div style="display:flex;flex-direction:column;align-items:center;gap:10px;">
+        <img src="https://ca.slack-edge.com/E7T5PNK3P-U01FU3SF89M-6e1011619e2e-512" alt="" style="width:96px;height:96px;border-radius:50%;object-fit:cover;border:2px solid rgba(0,179,255,0.5);">
+      </div>
+      <div style="display:flex;flex-direction:column;align-items:center;gap:10px;">
+        <img src="https://ca.slack-edge.com/E7T5PNK3P-U0AHX2RT48L-de88e5e5ab5c-512" alt="" style="width:96px;height:96px;border-radius:50%;object-fit:cover;border:2px solid rgba(0,179,255,0.5);">
+      </div>
+      <div style="display:flex;flex-direction:column;align-items:center;gap:10px;">
+        <div style="width:96px;height:96px;border-radius:50%;border:2px solid rgba(0,179,255,0.5);background:rgba(2,42,192,0.4);display:flex;align-items:center;justify-content:center;font-size:28px;letter-spacing:-4px;">👤👤👤</div>
+      </div>
+    </div>
+    <p style="font-size:16px;color:rgba(255,255,255,0.45);font-style:italic;text-align:center;">For the conversations, the candour, and the time.</p>
+  </div>
+</div>
+
+<!-- SLIDE 3 — AGENDA -->
+<div class="slide" id="s3">
+  <div class="si">
+    <span class="eyebrow">Agenda</span>
+    <h2 class="h" style="font-size:58px;margin-bottom:28px;">Five Sections.<br><em>One Story.</em></h2>
+    <div style="display:flex;flex-direction:column;gap:11px;" id="agenda-list">
+      <div class="ag-item"><span class="ag-num">1</span><span class="ag-name">Personal Introduction &amp; Credentials</span></div>
+      <div class="ag-item"><span class="ag-num">2</span><span class="ag-name">Stakeholder &amp; Team Story</span></div>
+      <div class="ag-item"><span class="ag-num">3</span><span class="ag-name">Leadership Philosophy &amp; Vision</span></div>
+      <div class="ag-item"><span class="ag-num">4</span><span class="ag-name">Strategic Plan for the Secondment</span></div>
+      <div class="ag-item"><span class="ag-num">5</span><span class="ag-name">Q&amp;A</span></div>
+    </div>
+  </div>
+</div>
+
+<!-- SLIDE 4 — BACKGROUND & CREDENTIALS -->
+<div class="slide" id="s4">
+  <div class="bc-wrap"><span class="bc1">SECTION 1 · PERSONAL INTRODUCTION &amp; CREDENTIALS</span><span class="bc2">BACKGROUND, JOURNEY &amp; CREDENTIALS</span></div>
+  <div class="si bc" style="flex-direction:row;gap:36px;">
+    <div style="flex:0 0 63%;display:flex;flex-direction:column;">
+      <h2 class="h" style="font-size:37px;margin-bottom:18px;">"Preparation is how you<br><em>earn the right to be in the room."</em></h2>
+      <div id="tl" style="flex:1;display:flex;flex-direction:column;justify-content:center;gap:0;"></div>
+    </div>
+    <div style="flex:1;display:flex;flex-direction:column;">
+      <span class="eyebrow">Credentials</span>
+      <div id="kpi-cards" style="flex:1;display:flex;flex-direction:column;justify-content:space-between;"></div>
+    </div>
+  </div>
+</div>
+
+<!-- SLIDE 5 — WHAT DRAWS ME & WHY NOW -->
+<div class="slide" id="s5">
+  <div class="bc-wrap"><span class="bc1">SECTION 1 · PERSONAL INTRODUCTION &amp; CREDENTIALS</span><span class="bc2">WHAT DRAWS ME TO THE OPPORTUNITY &amp; WHY NOW</span></div>
+  <div class="si bc" style="flex-direction:row;gap:0;">
+    <!-- LEFT: What Draws Me -->
+    <div style="flex:1;display:flex;flex-direction:column;padding-right:28px;border-right:1px solid rgba(0,179,255,0.18);justify-content:center;">
+      <h2 class="h" style="font-size:39px;margin-bottom:18px;">Not waiting for<br><em>a title to start.</em></h2>
+      <div style="display:flex;flex-direction:column;gap:10px;" id="ev-cards">
+        <div class="dc">
+          <div class="ec-head"><span class="ec-icon">🎯</span><span class="ec-title">Coaching</span></div>
+          <div style="font-size:16px;color:rgba(255,255,255,0.72);line-height:1.6;margin-top:6px;">Promotion coaching. Demo coaching. Colleagues came to me. No title, no obligation.</div>
+        </div>
+        <div class="dc">
+          <div class="ec-head"><span class="ec-icon">⚡</span><span class="ec-title">Proactivity</span></div>
+          <div style="font-size:16px;color:rgba(255,255,255,0.72);line-height:1.6;margin-top:6px;">GenesisCare: $10M board funding. Chemist Warehouse: POV the team anchored on. Not asked. Just did it.</div>
+        </div>
+        <div class="dc">
+          <div class="ec-head"><span class="ec-icon">🏆</span><span class="ec-title">Supporting Panels</span></div>
+          <div style="font-size:16px;color:rgba(255,255,255,0.72);line-height:1.6;margin-top:6px;">Hiring panelist alongside managers. Helping shape who joins this organisation.</div>
+        </div>
+      </div>
+    </div>
+    <!-- RIGHT: Why Now -->
+    <div style="flex:1;display:flex;flex-direction:column;padding-left:28px;justify-content:center;">
+      <h2 class="h" style="font-size:39px;margin-bottom:18px;">The timing is<br><em>deliberate.</em></h2>
+      <div style="display:flex;flex-direction:column;gap:10px;" id="why-pts">
+        <div class="dc">
+          <div class="ec-head"><span class="ec-icon">⏳</span><span class="ec-title">Two Years Ago</span></div>
+          <div style="font-size:16px;color:rgba(255,255,255,0.72);line-height:1.6;margin-top:6px;">Ambitious but not ready. SMB → Enterprise. Needed time to earn my stripes.</div>
+        </div>
+        <div class="dc">
+          <div class="ec-head"><span class="ec-icon">🚀</span><span class="ec-title">Since Then</span></div>
+          <div style="font-size:16px;color:rgba(255,255,255,0.72);line-height:1.6;margin-top:6px;">Largest accounts. Complex stakeholders. AI and Agentforce from day one.</div>
+        </div>
+        <div class="dc">
+          <div class="ec-head"><span class="ec-icon">💼</span><span class="ec-title">Why Now</span></div>
+          <div style="font-size:16px;color:rgba(255,255,255,0.72);line-height:1.6;margin-top:6px;"><em>"You need to have carried the bag to know how to lead. I've carried it."</em><span style="display:block;font-size:13px;color:rgba(255,255,255,0.38);margin-top:4px;">— Frank Fillman</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- SLIDE 6 — LC STORY (COMBINED) -->
+<div class="slide" id="s6">
+  <div class="bc-wrap"><span class="bc1">SECTION 2 · STAKEHOLDER &amp; TEAM STORY</span><span class="bc2">THE LIFESTYLE COMMUNITIES STORY</span></div>
+  <div class="si bc" style="flex-direction:column;gap:0;">
+    <div style="flex:1;display:flex;flex-direction:row;gap:12px;min-height:0;">
+      <!-- LEFT COLUMN -->
+      <div style="flex:1;display:flex;flex-direction:column;gap:12px;">
+        <!-- Q1 -->
+        <div class="dc s6-tile" id="s6t0" style="flex:1;display:flex;flex-direction:column;gap:7px;padding:16px 20px;">
+          <h2 class="h" style="font-size:26px;margin-bottom:0;line-height:1.1;">Before a single slide.</h2>
+          <p style="font-size:22px;color:var(--blue-l);font-weight:700;margin-bottom:6px;line-height:1.1;font-family:var(--fd);">step 0 was shifting the mindset.</p>
+          <div style="display:flex;flex-direction:column;gap:5px;">
+            <div style="font-size:14px;color:rgba(255,255,255,0.78);display:flex;gap:8px;"><span>🏙️</span><span><strong style="color:#fff;">15 communities.</strong> Disconnected platforms. Didn't consider Salesforce.</span></div>
+            <div style="font-size:14px;color:rgba(255,255,255,0.78);display:flex;gap:8px;"><span>💡</span><span><strong style="color:#fff;">Step 0:</strong> reframe from CRM vendor to end-to-end business platform.</span></div>
+            <div style="font-size:14px;color:rgba(255,255,255,0.78);display:flex;gap:8px;"><span>📅</span><span><strong style="color:#fff;">Enterprise-scale engagement.</strong> First of its kind for me at Core.</span></div>
+            <div style="font-size:14px;color:rgba(255,255,255,0.78);display:flex;gap:8px;"><span>🤝</span><span><strong style="color:#fff;">AE aligned from day one</strong> — one shared goal before a single meeting.</span></div>
+          </div>
+        </div>
+        <!-- Q3 -->
+        <div class="dc s6-tile" id="s6t2" style="flex:1;display:flex;flex-direction:column;gap:7px;padding:16px 20px;">
+          <h2 class="h" style="font-size:26px;margin-bottom:0;line-height:1.1;">Five confidences.</h2>
+          <p style="font-size:22px;color:var(--blue-l);font-weight:700;margin-bottom:6px;line-height:1.1;font-family:var(--fd);">built before I knew it had a name.</p>
+          <div style="display:flex;gap:5px;flex-wrap:wrap;margin-bottom:8px;">
+            <span style="background:rgba(0,179,255,0.12);border:1px solid rgba(0,179,255,0.35);border-radius:20px;padding:3px 10px;font-size:12px;font-weight:700;color:var(--blue-l);">Vision</span>
+            <span style="background:rgba(0,179,255,0.12);border:1px solid rgba(0,179,255,0.35);border-radius:20px;padding:3px 10px;font-size:12px;font-weight:700;color:var(--blue-l);">Value</span>
+            <span style="background:rgba(0,179,255,0.12);border:1px solid rgba(0,179,255,0.35);border-radius:20px;padding:3px 10px;font-size:12px;font-weight:700;color:var(--blue-l);">Technology</span>
+            <span style="background:rgba(0,179,255,0.12);border:1px solid rgba(0,179,255,0.35);border-radius:20px;padding:3px 10px;font-size:12px;font-weight:700;color:var(--blue-l);">Change</span>
+            <span style="background:rgba(0,179,255,0.12);border:1px solid rgba(0,179,255,0.35);border-radius:20px;padding:3px 10px;font-size:12px;font-weight:700;color:var(--blue-l);">Realisation</span>
+          </div>
+          <div style="display:flex;flex-direction:column;gap:5px;">
+            <div style="font-size:14px;color:rgba(255,255,255,0.78);display:flex;gap:8px;"><span>🏢</span><span><strong style="color:#fff;">CFO: Vision &amp; Value</strong> — before the demo</span></div>
+            <div style="font-size:14px;color:rgba(255,255,255,0.78);display:flex;gap:8px;"><span>💻</span><span><strong style="color:#fff;">Live demo: Technology</strong> — no Figma, no smoke and mirrors</span></div>
+            <div style="font-size:14px;color:rgba(255,255,255,0.78);display:flex;gap:8px;"><span>🔄</span><span><strong style="color:#fff;">Change conversation:</strong> surfaced friction before it ambushed us</span></div>
+            <div style="font-size:14px;color:rgba(255,255,255,0.78);display:flex;gap:8px;"><span>🏆</span><span><strong style="color:#fff;">Stayed post-win: Realisation</strong> — invested to the end</span></div>
+          </div>
+        </div>
+      </div>
+      <!-- RIGHT COLUMN -->
+      <div style="flex:1;display:flex;flex-direction:column;gap:12px;">
+        <!-- Q2 -->
+        <div class="dc s6-tile" id="s6t1" style="flex:1;display:flex;flex-direction:column;gap:7px;padding:16px 20px;">
+          <h2 class="h" style="font-size:26px;margin-bottom:0;line-height:1.1;">One vision.</h2>
+          <p style="font-size:22px;color:var(--blue-l);font-weight:700;margin-bottom:6px;line-height:1.1;font-family:var(--fd);">four relationships that made it.</p>
+          <div style="display:flex;flex-direction:column;gap:5px;">
+            <div style="font-size:14px;color:rgba(255,255,255,0.78);display:flex;gap:8px;"><span>🏢</span><span><strong style="color:#fff;">CFO</strong> — POV &amp; BVS playback built vision and value confidence before a single demo slide.</span></div>
+            <div style="font-size:14px;color:rgba(255,255,255,0.78);display:flex;gap:8px;"><span>💼</span><span><strong style="color:#fff;">AE</strong> — Sceptical of the process. Educated, persuaded, earned the trust.</span></div>
+            <div style="font-size:14px;color:rgba(255,255,255,0.78);display:flex;gap:8px;"><span>👥</span><span><strong style="color:#fff;">Specialist Team</strong> — 6 SEs. Walked in as individuals. Walked out as one team with one story.</span></div>
+            <div style="font-size:14px;color:rgba(255,255,255,0.78);display:flex;gap:8px;"><span>🔥</span><span><strong style="color:#fff;">Parallel Engagements</strong> — All of this while managing multiple active accounts simultaneously.</span></div>
+          </div>
+        </div>
+        <!-- Q4 -->
+        <div class="dc s6-tile" id="s6t3" style="flex:1;display:flex;flex-direction:column;gap:7px;padding:16px 20px;">
+          <h2 class="h" style="font-size:26px;margin-bottom:0;line-height:1.1;">Their growth</h2>
+          <p style="font-size:22px;color:var(--blue-l);font-weight:700;margin-bottom:6px;line-height:1.1;font-family:var(--fd);">was our growth.</p>
+          <div style="display:flex;flex-direction:column;flex:1;gap:0;">
+            <!-- Segment 1 -->
+            <div style="display:flex;flex-direction:column;gap:4px;padding-bottom:8px;">
+              <div style="font-size:11px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:rgba(255,255,255,0.45);">Back Then.</div>
+              <div style="font-size:13px;color:rgba(255,255,255,0.78);"><strong style="color:#fff;">$400K ACV · 9 products · 6 SEs</strong></div>
+              <div style="font-size:14px;letter-spacing:1.5px;line-height:1.3;">🏠🏠🏠🏠🏠🏠🏠🏠🏠🏠🏠🏠🏠🏠🏠</div>
+            </div>
+            <!-- Divider -->
+            <div style="height:1px;background:rgba(0,179,255,0.18);margin-bottom:8px;"></div>
+            <!-- Segment 2 -->
+            <div style="display:flex;flex-direction:column;gap:4px;">
+              <div style="font-size:12px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:var(--blue-l);">And Now.</div>
+              <div style="font-size:14px;color:rgba(255,255,255,0.78);"><strong style="color:#fff;font-size:15px;">+$800K ACV</strong></div>
+              <div style="font-size:16px;letter-spacing:1.5px;line-height:1.3;">🏠🏠🏠🏠🏠🏠🏠🏠🏠🏠🏠🏠🏠🏠🏠🏠🏠🏠🏠🏠🏠🏠🏠🏠🏠</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <p class="anchor" style="flex-shrink:0;margin-top:10px;font-size:18px;">"The number I'm most proud of isn't the $400K — it's what came after, on an account I'd already moved off."</p>
+  </div>
+</div>
+
+<!-- SLIDE 7 — THE LEADER I ASPIRE TO BE -->
+<div class="slide" id="s7">
+  <div class="bc-wrap"><span class="bc1">SECTION 3 · LEADERSHIP PHILOSOPHY &amp; VISION</span><span class="bc2">THE LEADER I ASPIRE TO BE</span></div>
+  <div class="si bc" style="flex-direction:column;gap:0;">
+    <h2 class="h" style="font-size:26px;font-style:italic;font-weight:600;margin-bottom:10px;line-height:1.4;color:rgba(255,255,255,0.92);">"A tenured SE told me recently they felt like they were hanging on by their fingernails."</h2>
+    <div style="flex:1;display:flex;flex-direction:row;gap:12px;min-height:0;">
+      <!-- LEFT COLUMN -->
+      <div style="flex:1;display:flex;flex-direction:column;gap:12px;">
+        <!-- Q1: Lead with Values -->
+        <div class="dc s7-tile" id="s7t0" style="flex:1;display:flex;flex-direction:column;gap:10px;padding:14px 18px;transform:translateX(-60px);">
+          <h2 class="h" style="font-size:24px;margin-bottom:0;line-height:1.1;">Lead with Values.</h2>
+          <p style="font-size:20px;color:var(--blue-l);font-weight:700;margin-bottom:4px;line-height:1.1;font-family:var(--fd);">forged on the football field. ⚽</p>
+          <div style="display:flex;gap:10px;align-items:center;">
+            <div style="flex:1;background:var(--blue-m);border-radius:50px;height:48px;display:flex;align-items:center;justify-content:center;font-size:17px;font-weight:700;color:#fff;white-space:nowrap;">Teamwork</div>
+            <div style="flex:1;background:var(--blue-m);border-radius:50px;height:48px;display:flex;align-items:center;justify-content:center;font-size:17px;font-weight:700;color:#fff;white-space:nowrap;">Accountability</div>
+            <div style="flex:1;background:var(--blue-m);border-radius:50px;height:48px;display:flex;align-items:center;justify-content:center;font-size:17px;font-weight:700;color:#fff;white-space:nowrap;">Trust</div>
+          </div>
+          <div style="font-size:14px;color:rgba(255,255,255,0.68);line-height:1.55;text-align:center;"><strong style="color:#fff;">Individual brilliance only gets you so far.</strong> A well-functioning team beats it every time.</div>
+        </div>
+        <!-- Q3: High-performing & inclusive -->
+        <div class="dc s7-tile" id="s7t2" style="flex:1;display:flex;flex-direction:column;gap:9px;padding:14px 18px;transform:translateX(-60px);">
+          <h2 class="h" style="font-size:24px;margin-bottom:0;line-height:1.1;">High-performing &amp; inclusive.</h2>
+          <p style="font-size:20px;color:var(--blue-l);font-weight:700;margin-bottom:2px;line-height:1.1;font-family:var(--fd);">you can hear it in how people talk about each other.</p>
+          <div style="display:flex;flex-direction:column;gap:8px;">
+            <div style="font-size:14px;color:rgba(255,255,255,0.82);display:flex;gap:10px;"><span>👂</span><span><strong style="color:#fff;">Culture is visible</strong> when the person isn't in the room</span></div>
+            <div style="font-size:14px;color:rgba(255,255,255,0.82);display:flex;gap:10px;"><span>🛡️</span><span><strong style="color:#fff;">Psychological safety isn't soft</strong> — it's the precondition for a team that learns</span></div>
+            <div style="font-size:14px;color:rgba(255,255,255,0.82);display:flex;gap:10px;"><span>🤖</span><span><strong style="color:#fff;">No one left behind on AI</strong> — confidence built in a safe environment</span></div>
+            <div style="font-size:14px;color:rgba(255,255,255,0.82);display:flex;gap:10px;"><span>💡</span><span><strong style="color:#fff;">Best thinking,</strong> not safest thinking</span></div>
+          </div>
+        </div>
+      </div>
+      <!-- RIGHT COLUMN -->
+      <div style="flex:1;display:flex;flex-direction:column;gap:12px;">
+        <!-- Q2: How I aspire to lead -->
+        <div class="dc s7-tile" id="s7t1" style="flex:1;display:flex;flex-direction:column;gap:9px;padding:14px 18px;transform:translateX(60px);">
+          <h2 class="h" style="font-size:24px;margin-bottom:0;line-height:1.1;">How I aspire to lead.</h2>
+          <p style="font-size:20px;color:var(--blue-l);font-weight:700;margin-bottom:2px;line-height:1.1;font-family:var(--fd);">the traits I saw. the leader I chose to become.</p>
+          <div style="display:flex;flex-direction:column;gap:8px;">
+            <div style="font-size:14px;color:rgba(255,255,255,0.82);display:flex;gap:10px;"><span>🌟</span><span><strong style="color:#fff;">Led by example</strong> — set a benchmark others wanted to follow</span></div>
+            <div style="font-size:14px;color:rgba(255,255,255,0.82);display:flex;gap:10px;"><span>🔑</span><span><strong style="color:#fff;">Creative license &amp; autonomy</strong> — trusted to do it my way, backed when it mattered</span></div>
+            <div style="font-size:14px;color:rgba(255,255,255,0.82);display:flex;gap:10px;"><span>💼</span><span><strong style="color:#fff;">Understood the IC experience</strong> — cut through noise, focused on what matters</span></div>
+            <div style="font-size:14px;color:rgba(255,255,255,0.82);display:flex;gap:10px;"><span>❤️</span><span><strong style="color:#fff;">Deals. Career. Person.</strong></span></div>
+          </div>
+        </div>
+        <!-- Q4: How I'll show up -->
+        <div class="dc s7-tile" id="s7t3" style="flex:1;display:flex;flex-direction:column;gap:9px;padding:14px 18px;transform:translateX(60px);">
+          <h2 class="h" style="font-size:24px;margin-bottom:0;line-height:1.1;">How I'll show up.</h2>
+          <p style="font-size:20px;color:var(--blue-l);font-weight:700;margin-bottom:2px;line-height:1.1;font-family:var(--fd);">day one. listen first.</p>
+          <div style="display:flex;flex-direction:column;gap:8px;">
+            <div style="font-size:14px;color:rgba(255,255,255,0.82);display:flex;gap:10px;"><span>📝</span><span><strong style="color:#fff;">Three questions</strong> — What's top of mind? How can I help? What's working — and what needs to change?</span></div>
+            <div style="font-size:14px;color:rgba(255,255,255,0.82);display:flex;gap:10px;"><span>🤝</span><span><strong style="color:#fff;">Partner with sales and the wider SE community</strong> — from day one.</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- SLIDE 8 — THE OPPORTUNITY. THE PLAN. THE CULTURE. -->
+<div class="slide" id="s8">
+  <div class="bc-wrap"><span class="bc1">SECTION 4 · STRATEGIC PLAN FOR THE SECONDMENT</span><span class="bc2">THE OPPORTUNITY. THE PLAN. THE CULTURE.</span></div>
+  <div class="si bc" style="flex-direction:column;gap:0;">
+    <div style="flex:1;display:flex;flex-direction:row;gap:12px;min-height:0;">
+      <!-- LEFT COLUMN -->
+      <div style="flex:1;display:flex;flex-direction:column;gap:12px;">
+        <!-- Q1: The landscape -->
+        <div class="dc s8-tile" id="s8t0" style="flex:1;display:flex;flex-direction:column;gap:7px;padding:16px 20px;">
+          <h2 class="h" style="font-size:26px;margin-bottom:0;line-height:1.1;">The landscape.</h2>
+          <p style="font-size:22px;color:var(--blue-l);font-weight:700;margin-bottom:6px;line-height:1.1;font-family:var(--fd);">three signals. none are noise.</p>
+          <div style="display:flex;flex-direction:column;gap:5px;">
+            <div style="font-size:14px;color:rgba(255,255,255,0.78);display:flex;gap:8px;"><span>🤖</span><span><strong style="color:#fff;">AI-Native:</strong> The SE who hasn't changed their workflow has already fallen behind.</span></div>
+            <div style="font-size:14px;color:rgba(255,255,255,0.78);display:flex;gap:8px;"><span>🔁</span><span><strong style="color:#fff;">GTM 2.0:</strong> NNAOV demands a different kind of SE — champion of adoption, not just architecture.</span></div>
+            <div style="font-size:14px;color:rgba(255,255,255,0.78);display:flex;gap:8px;"><span>🧠</span><span><strong style="color:#fff;">Collective Intelligence:</strong> The best idea in this team only has value if the whole team knows it.</span></div>
+          </div>
+        </div>
+        <!-- Q3: The culture -->
+        <div class="dc s8-tile" id="s8t2" style="flex:1;display:flex;flex-direction:column;gap:6px;padding:16px 20px;">
+          <h2 class="h" style="font-size:26px;margin-bottom:0;line-height:1.1;">The culture.</h2>
+          <p style="font-size:22px;color:var(--blue-l);font-weight:700;margin-bottom:4px;line-height:1.1;font-family:var(--fd);">a hypothesis, not a conclusion.</p>
+          <div style="display:flex;flex-direction:column;gap:5px;">
+            <div style="font-size:14px;color:rgba(255,255,255,0.78);display:flex;gap:8px;"><span>🗺️</span><span><strong style="color:#fff;">Dispersed by Design.</strong> Enterprise SE is unique — industry-aligned, account-focused, geographically spread.</span></div>
+            <div style="font-size:14px;color:rgba(255,255,255,0.78);display:flex;gap:8px;"><span>🔍</span><span><strong style="color:#fff;">What Other Teams Show Us.</strong> Other segments build bonds organically. Our structure requires intentionality — and that's okay.</span></div>
+            <div style="font-size:14px;color:rgba(255,255,255,0.78);display:flex;gap:8px;"><span>🚀</span><span><strong style="color:#fff;">The Opportunity.</strong> We're already showing up. Surface the commonality, build the momentum, make it deliberate.</span></div>
+          </div>
+        </div>
+      </div>
+      <!-- RIGHT COLUMN -->
+      <div style="flex:1;display:flex;flex-direction:column;gap:12px;">
+        <!-- Q2: Two initiatives -->
+        <div class="dc s8-tile" id="s8t1" style="flex:1;display:flex;flex-direction:column;gap:7px;padding:16px 20px;">
+          <h2 class="h" style="font-size:26px;margin-bottom:0;line-height:1.1;">Two initiatives.</h2>
+          <p style="font-size:22px;color:var(--blue-l);font-weight:700;margin-bottom:6px;line-height:1.1;font-family:var(--fd);">designed to close the gaps.</p>
+          <div style="display:flex;flex-direction:column;gap:8px;">
+            <div style="background:rgba(2,42,192,0.35);border:1px solid rgba(0,179,255,0.22);border-radius:6px;padding:10px 14px;">
+              <div style="margin-bottom:5px;"><span class="pb" style="font-size:11px;">Wider SE Community</span></div>
+              <div style="font-size:14px;font-weight:700;color:#fff;margin-bottom:3px;">AI-Native SE Enablement Program</div>
+              <div style="font-size:13px;color:rgba(255,255,255,0.68);line-height:1.55;">Practical sessions. Coding tools, MCP, GTM 2.0. Not a one-off — embedded in monthly rhythm.</div>
+            </div>
+            <div style="background:rgba(2,42,192,0.35);border:1px solid rgba(0,179,255,0.22);border-radius:6px;padding:10px 14px;">
+              <div style="margin-bottom:5px;"><span class="pb" style="font-size:11px;">Internal Team</span></div>
+              <div style="font-size:14px;font-weight:700;color:#fff;margin-bottom:3px;">Weekly SE Team Share</div>
+              <div style="font-size:13px;color:rgba(255,255,255,0.68);line-height:1.55;">Calendarised. Round-robin. Bite-sized. Practical. Relevant.</div>
+              <div style="display:flex;flex-wrap:wrap;gap:5px;margin-top:7px;">
+                <span class="pb" style="font-size:11px;">Raises the Floor</span>
+                <span class="pb" style="font-size:11px;">Builds Safety</span>
+                <span class="pb" style="font-size:11px;">Creates Accountability</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- Q4: The measure -->
+        <div class="dc s8-tile" id="s8t3" style="flex:1;display:flex;flex-direction:column;gap:7px;padding:16px 20px;">
+          <h2 class="h" style="font-size:26px;margin-bottom:0;line-height:1.1;">The measure.</h2>
+          <p style="font-size:22px;color:var(--blue-l);font-weight:700;margin-bottom:6px;line-height:1.1;font-family:var(--fd);">what good looks like.</p>
+          <div style="display:flex;flex-direction:column;gap:5px;">
+            <div style="font-size:14px;color:rgba(255,255,255,0.78);display:flex;gap:8px;"><span>📊</span><span><strong style="color:#fff;">NNAOV:</strong> Plan designed to contribute to and exceed NNAOV targets.</span></div>
+            <div style="font-size:14px;color:rgba(255,255,255,0.78);display:flex;gap:8px;"><span>🔄</span><span><strong style="color:#fff;">Initiatives outlive secondment</strong> — embedded in monthly rhythm, running in perpetuity.</span></div>
+            <div style="font-size:14px;color:rgba(255,255,255,0.78);display:flex;gap:8px;"><span>🚀</span><span>Every SE <strong style="color:#fff;">more equipped, more confident, more connected</strong> by December.</span></div>
+            <div style="font-size:14px;color:rgba(255,255,255,0.78);display:flex;gap:8px;"><span>📋</span><span><strong style="color:#fff;">GIS survey:</strong> team culture data collected Nov / Dec as a baseline and north star.</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- SLIDE 9 — 6-MONTH PLAN -->
+<div class="slide" id="s10">
+  <div class="bc-wrap"><span class="bc1">SECTION 4 · STRATEGIC PLAN FOR THE SECONDMENT</span><span class="bc2">6-MONTH PLAN — JUNE TO DECEMBER</span></div>
+  <div class="si bc" style="flex-direction:column;gap:0;">
+    <h2 class="h" style="font-size:46px;margin-bottom:6px;flex-shrink:0;">June to December.<br><em>Foundations. Momentum. Legacy.</em></h2>
+
+    <div id="s9chart" style="flex:1;position:relative;min-height:0;overflow:hidden;">
+
+      <!-- SVG: pointer-events none on everything so clicks pass through to .s9dot divs -->
+      <svg id="curve-svg" viewBox="0 0 1200 420" preserveAspectRatio="none"
+           style="position:absolute;inset:0;width:100%;height:100%;pointer-events:none;"
+           xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <linearGradient id="curveGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+            <stop offset="0%" stop-color="#066AFE"/>
+            <stop offset="60%" stop-color="#00B3FF"/>
+            <stop offset="100%" stop-color="#ffffff" stop-opacity="0.9"/>
+          </linearGradient>
+          <filter id="cglow" x="-20%" y="-80%" width="140%" height="260%">
+            <feGaussianBlur in="SourceGraphic" stdDeviation="3.5" result="b"/>
+            <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+          </filter>
+        </defs>
+
+        <!-- Y-axis -->
+        <line x1="70" y1="20" x2="70" y2="380" stroke="rgba(255,255,255,0.15)" stroke-width="1.5" pointer-events="none"/>
+        <!-- X-axis -->
+        <line x1="70" y1="380" x2="1170" y2="380" stroke="rgba(255,255,255,0.15)" stroke-width="1.5" pointer-events="none"/>
+        <!-- Y label -->
+        <text x="24" y="200" font-family="'Salesforce Sans',system-ui,sans-serif" font-size="13" font-weight="700"
+              letter-spacing="3.5" fill="rgba(255,255,255,0.3)" text-anchor="middle"
+              transform="rotate(-90 24 200)" pointer-events="none">MOMENTUM</text>
+        <!-- Grid -->
+        <line x1="70" y1="275" x2="1170" y2="275" stroke="rgba(255,255,255,0.05)" stroke-width="1" stroke-dasharray="5,5" pointer-events="none"/>
+        <line x1="70" y1="170" x2="1170" y2="170" stroke="rgba(255,255,255,0.05)" stroke-width="1" stroke-dasharray="5,5" pointer-events="none"/>
+
+        <!-- Curve segments: seg0–seg3, display none initially -->
+        <!-- dot positions in viewBox: dot0(216,387) dot1(480,302) dot2(756,176) dot3(996,42) -->
+        <path id="seg0" d="M 80,410 C 130,408 170,400 216,387"
+              fill="none" stroke="url(#curveGradient)" stroke-width="3" stroke-linecap="round"
+              filter="url(#cglow)" style="display:none;" pointer-events="none"/>
+        <path id="seg1" d="M 216,387 C 310,370 390,330 480,302"
+              fill="none" stroke="url(#curveGradient)" stroke-width="3" stroke-linecap="round"
+              filter="url(#cglow)" style="display:none;" pointer-events="none"/>
+        <path id="seg2" d="M 480,302 C 580,272 660,220 756,176"
+              fill="none" stroke="url(#curveGradient)" stroke-width="3" stroke-linecap="round"
+              filter="url(#cglow)" style="display:none;" pointer-events="none"/>
+        <path id="seg3" d="M 756,176 C 840,138 920,82 996,42"
+              fill="none" stroke="url(#curveGradient)" stroke-width="3" stroke-linecap="round"
+              filter="url(#cglow)" style="display:none;" pointer-events="none"/>
+
+        <!-- X-axis ticks -->
+        <!-- dot0=216/1200=18%, dot1=480/1200=40%, dot2=756/1200=63%, dot3=996/1200=83% -->
+        <line x1="216" y1="380" x2="216" y2="392" stroke="rgba(255,255,255,0.22)" stroke-width="1.5" pointer-events="none"/>
+        <line x1="480" y1="380" x2="480" y2="392" stroke="rgba(255,255,255,0.22)" stroke-width="1.5" pointer-events="none"/>
+        <line x1="756" y1="380" x2="756" y2="392" stroke="rgba(255,255,255,0.22)" stroke-width="1.5" pointer-events="none"/>
+        <line x1="996" y1="380" x2="996" y2="392" stroke="rgba(255,255,255,0.22)" stroke-width="1.5" pointer-events="none"/>
+        <!-- X-axis labels -->
+        <text x="216" y="415" font-family="'Salesforce Sans',system-ui,sans-serif" font-size="16" fill="rgba(255,255,255,0.45)" text-anchor="middle" pointer-events="none">June</text>
+        <text x="480" y="415" font-family="'Salesforce Sans',system-ui,sans-serif" font-size="16" fill="rgba(255,255,255,0.45)" text-anchor="middle" pointer-events="none">Jul / Aug</text>
+        <text x="756" y="415" font-family="'Salesforce Sans',system-ui,sans-serif" font-size="16" fill="rgba(255,255,255,0.45)" text-anchor="middle" pointer-events="none">Sep / Oct</text>
+        <text x="996" y="415" font-family="'Salesforce Sans',system-ui,sans-serif" font-size="16" fill="rgba(255,255,255,0.45)" text-anchor="middle" pointer-events="none">Nov / Dec</text>
+      </svg>
+
+      <!-- Dots: left% matches dot x/1200, bottom% matches (420-dot y)/420 -->
+      <!-- dot0: x=216→18%, y=387→(420-387)/420=7.9%→bottom:8% -->
+      <div class="s9dot" id="dot0" style="left:18%;bottom:8%;">📋</div>
+      <!-- dot1: x=480→40%, y=302→(420-302)/420=28.1%→bottom:28% -->
+      <div class="s9dot" id="dot1" style="left:40%;bottom:28%;">🌱</div>
+      <!-- dot2: x=756→63%, y=176→(420-176)/420=58.1%→bottom:58% -->
+      <div class="s9dot" id="dot2" style="left:63%;bottom:58%;">📈</div>
+      <!-- dot3: x=996→83%, y=42→(420-42)/420=90%→bottom:90% -->
+      <div class="s9dot" id="dot3" style="left:83%;bottom:84%;">🏆</div>
+
+      <!-- Tiles: positioned above each dot, centred on same left% -->
+      <!-- tile0: above dot0 — dot bottom:8%, tile sits above it -->
+      <div class="s9tile" id="tile0" style="left:18%;bottom:22%;transform:translateX(-50%);">
+        <div style="font-size:12px;font-weight:700;color:#fff;margin-bottom:1px;">June</div>
+        <div style="font-size:11px;font-weight:700;color:#00C4E0;margin-bottom:6px;line-height:1.3;">Foundations &amp; Handover</div>
+        <ul style="list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:3px;">
+          <li style="font-size:10px;color:rgba(255,255,255,0.75);padding-left:9px;position:relative;line-height:1.5;"><span style="position:absolute;left:0;color:#00C4E0;">·</span>Handover complete — both directions</li>
+          <li style="font-size:10px;color:rgba(255,255,255,0.75);padding-left:9px;position:relative;line-height:1.5;"><span style="position:absolute;left:0;color:#00C4E0;">·</span>Key relationships and cadences established</li>
+          <li style="font-size:10px;color:rgba(255,255,255,0.75);padding-left:9px;position:relative;line-height:1.5;"><span style="position:absolute;left:0;color:#00C4E0;">·</span>Initiative 2 firing — no reason to wait</li>
+        </ul>
+      </div>
+      <!-- tile1: above dot1 — dot bottom:28% -->
+      <div class="s9tile" id="tile1" style="left:40%;bottom:42%;transform:translateX(-50%);">
+        <div style="font-size:12px;font-weight:700;color:#fff;margin-bottom:1px;">Jul / Aug</div>
+        <div style="font-size:11px;font-weight:700;color:#00C4E0;margin-bottom:6px;line-height:1.3;">Settling In</div>
+        <ul style="list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:3px;">
+          <li style="font-size:10px;color:rgba(255,255,255,0.75);padding-left:9px;position:relative;line-height:1.5;"><span style="position:absolute;left:0;color:#00C4E0;">·</span>Showing up consistently</li>
+          <li style="font-size:10px;color:rgba(255,255,255,0.75);padding-left:9px;position:relative;line-height:1.5;"><span style="position:absolute;left:0;color:#00C4E0;">·</span>Three questions answered in actions, not words</li>
+          <li style="font-size:10px;color:rgba(255,255,255,0.75);padding-left:9px;position:relative;line-height:1.5;"><span style="position:absolute;left:0;color:#00C4E0;">·</span>Finding my leadership rhythm</li>
+        </ul>
+      </div>
+      <!-- tile2: above dot2 — dot bottom:58% -->
+      <div class="s9tile" id="tile2" style="left:63%;bottom:72%;transform:translateX(-50%);">
+        <div style="font-size:12px;font-weight:700;color:#fff;margin-bottom:1px;">Sep / Oct</div>
+        <div style="font-size:11px;font-weight:700;color:#00C4E0;margin-bottom:6px;line-height:1.3;">Momentum</div>
+        <ul style="list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:3px;">
+          <li style="font-size:10px;color:rgba(255,255,255,0.75);padding-left:9px;position:relative;line-height:1.5;"><span style="position:absolute;left:0;color:#00C4E0;">·</span>Results showing — numbers AND how the team feels</li>
+          <li style="font-size:10px;color:rgba(255,255,255,0.75);padding-left:9px;position:relative;line-height:1.5;"><span style="position:absolute;left:0;color:#00C4E0;">·</span>More confident, more AI-native, sharing becoming habit</li>
+          <li style="font-size:10px;color:rgba(255,255,255,0.75);padding-left:9px;position:relative;line-height:1.5;"><span style="position:absolute;left:0;color:#00C4E0;">·</span>Leadership finding its shape</li>
+        </ul>
+      </div>
+      <!-- tile3: centred under dot3 (left:80%) -->
+      <div class="s9tile" id="tile3" style="position:absolute;top:38%;left:80%;transform:translateX(-50%);">
+        <div style="font-size:12px;font-weight:700;color:#fff;margin-bottom:1px;">Nov / Dec</div>
+        <div style="font-size:11px;font-weight:700;color:#00C4E0;margin-bottom:6px;line-height:1.3;">Legacy &amp; Handback</div>
+        <ul style="list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:3px;">
+          <li style="font-size:10px;color:rgba(255,255,255,0.75);padding-left:9px;position:relative;line-height:1.5;"><span style="position:absolute;left:0;color:#00C4E0;">·</span>GIS feedback heard, gaps owned, improvements made</li>
+          <li style="font-size:10px;color:rgba(255,255,255,0.75);padding-left:9px;position:relative;line-height:1.5;"><span style="position:absolute;left:0;color:#00C4E0;">·</span>Initiatives outlived the secondment</li>
+          <li style="font-size:10px;color:rgba(255,255,255,0.75);padding-left:9px;position:relative;line-height:1.5;"><span style="position:absolute;left:0;color:#00C4E0;">·</span>Every SE a better, more equipped professional than June</li>
+        </ul>
+      </div>
+
+
+    </div><!-- /s9chart -->
+    <p class="anchor" style="margin-top:6px;flex-shrink:0;">"I want the things we built to still be running long after I've handed back the keys."</p>
+  </div>
+</div>
+
+<!-- SLIDE 10 — CONTINUITY PLAN -->
+<div class="slide" id="s9">
+  <div class="bc-wrap"><span class="bc1">SECTION 4 · STRATEGIC PLAN FOR THE SECONDMENT</span><span class="bc2">PROPOSED TRANSITION &amp; CONTINUITY PLAN</span></div>
+  <div class="si bc">
+    <h2 class="h" style="font-size:44px;margin-bottom:6px;">4 of the Top 40 accounts.<br>Zero disruption.<br><em>Non-negotiable.</em></h2>
+    <p style="font-size:18px;color:rgba(255,255,255,0.72);font-style:italic;margin-bottom:16px;">I've already had the conversations. Every SE said yes.</p>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:11px;margin-bottom:12px;" id="acct-grid">
+      <div class="ac"><div class="keen">✓ Keen</div><div class="ac-name">Calvary → Iliya</div><div class="ac-se">Core SE — Original Calvary Win FY24</div><ul class="ac-body"><li>Deep understanding of account history</li><li>Previously worked with the AE</li><li>Moved to Commercial in restructure — maintained health connection</li></ul></div>
+      <div class="ac"><div class="keen">✓ Keen</div><div class="ac-name">Sonic Healthcare → Sarah</div><div class="ac-se">Recently promoted into Commercial</div><ul class="ac-body"><li>Ambitious, driven</li><li>External showcase featured PRP Diagnostics — direct Sonic competitor</li><li>Exec sponsor coverage planned as part of transition</li></ul></div>
+      <div class="ac"><div class="keen">✓ Keen</div><div class="ac-name">Sigma / Chemist Warehouse → Baron</div><div class="ac-se">Mature SE, Commercial</div><ul class="ac-body"><li>Active health account experience</li><li>Has worked with the AE across other accounts</li><li>Strong stakeholder skills and appetite for the vertical</li></ul></div>
+      <div class="ac"><div class="keen">✓ Keen</div><div class="ac-name">EBOS → Mohi</div><div class="ac-se">Star performer, SMB</div><ul class="ac-body"><li>Active health account experience</li><li>Proactively offered to help — before I even asked</li><li>EBOS in UAT for Agentforce right now — alignment is significant</li></ul></div>
+    </div>
+    <div style="display:flex;gap:12px;flex-wrap:wrap;justify-content:center;margin-top:4px;">
+      <div class="ft" style="background:rgba(255,255,255,0.15);border:1.5px solid rgba(255,255,255,0.8);color:#ffffff;font-size:15px;padding:10px 22px;border-radius:999px;font-weight:500;">📋 Structured Phased Handover</div>
+      <div class="ft" style="background:rgba(255,255,255,0.15);border:1.5px solid rgba(255,255,255,0.8);color:#ffffff;font-size:15px;padding:10px 22px;border-radius:999px;font-weight:500;">🧭 Accelerated Upskilling via Mentorship</div>
+      <div class="ft" style="background:rgba(255,255,255,0.15);border:1.5px solid rgba(255,255,255,0.8);color:#ffffff;font-size:15px;padding:10px 22px;border-radius:999px;font-weight:500;">🔭 Ongoing Strategic Oversight</div>
+    </div>
+  </div>
+</div>
+
+<!-- SLIDE 11 — Q&A -->
+<div class="slide" id="s11">
+  <div style="position:absolute;top:24px;left:40px;"><span class="bc1" style="font-size:15px;letter-spacing:0.1em;">Q&amp;A</span></div>
+  <div class="si" style="align-items:center;justify-content:center;text-align:center;">
+    <h1 style="font-family:var(--fd);font-size:97px;font-weight:600;color:#fff;letter-spacing:-0.02em;margin-bottom:18px;">Q&amp;A</h1>
+    <p style="font-size:22px;color:rgba(255,255,255,0.5);font-style:italic;">Over to you.</p>
+  </div>
+</div>
+
+<!-- SLIDE 12 — WHY ME -->
+<div class="slide" id="s12">
+  <div class="bc-wrap"><span class="bc1">SECTION 4 · IN CLOSING</span><span class="bc2">WHY ME.</span></div>
+  <div class="si bc" style="flex-direction:row;gap:0;padding-bottom:52px;">
+    <!-- LEFT COLUMN: title + pills -->
+    <div style="flex:0 0 50%;display:flex;flex-direction:column;padding-right:28px;min-width:0;">
+      <h2 class="h" style="font-size:clamp(36px,4vw,56px);margin-bottom:22px;">Why Me.</h2>
+      <div style="display:flex;flex-direction:column;gap:9px;">
+        <div class="wm-pill" id="wmp0"><div class="wm-badge">🏥</div><div><div class="wm-pill-title">EBOS, Cochlear, Sonic</div><div class="wm-pill-sub">Executive complexity, found a way through every time.</div></div></div>
+        <div class="wm-pill" id="wmp1"><div class="wm-badge">🤝</div><div><div class="wm-pill-title">Coaching SEs doesn't feel like work to me</div><div class="wm-pill-sub">It energises me.</div></div></div>
+        <div class="wm-pill" id="wmp2"><div class="wm-badge">🗺️</div><div><div class="wm-pill-title">Before anyone asked, I'd already mapped the transition</div><div class="wm-pill-sub">Four accounts, four SEs.</div></div></div>
+        <div class="wm-pill" id="wmp3"><div class="wm-badge">🎯</div><div><div class="wm-pill-title">Complex, multi-stakeholder pursuits end to end</div><div class="wm-pill-sub">I know what it takes.</div></div></div>
+        <div class="wm-pill" id="wmp4"><div class="wm-badge">👂</div><div><div class="wm-pill-title">My initiatives reflect what SEs here have actually been asking for</div><div class="wm-pill-sub">I listened first.</div></div></div>
+        <div class="wm-pill" id="wmp5"><div class="wm-badge">🚀</div><div><div class="wm-pill-title">There's no warm-up needed</div><div class="wm-pill-sub">I'm already in the room.</div></div></div>
+      </div>
+      <p class="wm-footer" style="margin-top:auto;text-align:left;">Aleksandar Chumkovski – Principal Account SE, Enterprise HLS – May 2026</p>
+    </div>
+    <!-- RIGHT COLUMN: prompt + mic-drop -->
+    <div style="flex:0 0 50%;display:flex;flex-direction:column;align-items:center;justify-content:center;padding-left:28px;border-left:1px solid rgba(255,255,255,0.08);">
+      <div id="wm-prompt" class="wm-prompt" style="display:none;">
+        <span class="wm-prompt-ch">›</span><span class="wm-prompt-lbl">click to reveal</span>
+      </div>
+      <div id="wm-mic" class="wm-mic" style="font-size:28px;padding:52px 40px;border-radius:16px;line-height:1.6;width:100%;">"I don't need this role to start leading. I need it to do it properly."</div>
+    </div>
+  </div>
+</div>
+
+<!-- SLIDE 13 — THANK YOU -->
+<div class="slide" id="s13">
+  <div class="si" style="align-items:center;justify-content:center;gap:0;">
+    <h1 style="font-family:var(--fd);font-size:97px;font-weight:600;color:#fff;letter-spacing:-0.02em;margin-bottom:24px;">Thank You.</h1>
+    <div style="width:60%;height:1px;background:linear-gradient(90deg,transparent,var(--blue-l),transparent);margin:0 auto 18px;"></div>
+    <p style="font-size:15px;color:rgba(255,255,255,0.38);text-align:center;">Aleksandar Chumkovski – Principal Account SE, Enterprise HLS – May 2026</p>
+  </div>
+</div>
+
+</div><!-- /deck -->
+
+<!-- LOGO PILL -->
+<div id="lp">
+  <img src="assets/logos/Salesforce-Corporate-Logo-Cloud-RBG.svg" width="32" height="28" alt="Salesforce">
+  <div class="lpd"></div>
+  <span class="lpt">Salesforce</span>
+</div>
+
+<!-- NAV -->
+<div id="nav">
+  <button class="nb" id="btn-p" onclick="go(-1)">‹</button>
+  <div id="dots"></div>
+  <button class="nb" id="btn-n" onclick="go(1)">›</button>
+</div>
+<span id="ctr">1 / 12</span>
+
+<script>
+/* ─── DECK ENGINE ─────────────────────────────────────── */
+const TOTAL = 13;
+let cur = 1, busy = false;
+const entered = new Set();
+
+const slides = Array.from({length:TOTAL},(_,i)=>document.getElementById('s'+(i+1)));
+
+function buildDots(){
+  const c=document.getElementById('dots');
+  for(let i=1;i<=TOTAL;i++){
+    const d=document.createElement('div');
+    d.className='dot'+(i===1?' active':'');
+    d.onclick=()=>go(i-cur);
+    c.appendChild(d);
+  }
+}
+
+function updateUI(){
+  document.querySelectorAll('.dot').forEach((d,i)=>d.classList.toggle('active',i+1===cur));
+  document.getElementById('ctr').textContent=cur+' / '+TOTAL;
+  document.getElementById('btn-p').disabled=cur===1;
+  document.getElementById('btn-n').disabled=cur===TOTAL;
+}
+
+function go(d){
+  if(busy)return;
+  const n=cur+d;
+  if(n<1||n>TOTAL)return;
+  busy=true;
+  if(cur===4)stopS4Dot();
+  if(cur===6||cur===7||cur===8)cleanQClevs();
+  slides[cur-1].classList.remove('active');
+  slides[n-1].classList.add('active');
+  cur=n;
+  updateUI();
+  onEnter(n);
+  setTimeout(()=>{busy=false;},420);
+}
+
+document.addEventListener('keydown',e=>{
+  if(e.key==='ArrowRight'||e.key==='ArrowDown')go(1);
+  if(e.key==='ArrowLeft'||e.key==='ArrowUp')go(-1);
+});
+
+/* ─── SLIDE ENTER ─────────────────────────────────────── */
+function onEnter(n){
+  if(n===3)initS3();
+  if(n===4)initS4();
+  if(n===5)initS5();
+  if(n===6)initS6();
+  if(n===7)initS7();
+  if(n===8)initS8();
+  if(n===9)initS15();
+  if(n===10)initS9();
+  if(n===12)initS12();
+}
+
+/* ─── SLIDE 3 — AGENDA ────────────────────────────────── */
+function initS3(){
+  document.querySelectorAll('#agenda-list .ag-item').forEach((el,i)=>
+    setTimeout(()=>el.classList.add('show'),200+i*180));
+}
+
+/* ─── SLIDE 4 — TIMELINE + KPI ───────────────────────── */
+const tlData=[
+  {e:'🎓',l:'The Enabler',d:'Computer Engineering. Thesis in KM. Joy from helping others get it.'},
+  {e:'🤝',l:'The Buyer & Seller',d:'IT Service Management & Operations. Both sides of the table.'},
+  {e:'🏗️',l:'The Force Multiplier',d:'Spotted a gap in our consumption model. Built the framework. Sent across Asia.'},
+  {e:'🌐',l:'The Insider',d:'Researched the culture. Attended events. Spoke to customers and SEs. Arrived feeling like an internal hire.'},
+  {e:'📈',l:'The Achiever',d:'Datorama (Senior SE) → SMB (Lead SE) → Enterprise HLS (Principal SE). Hiring panelist. No shortcuts.'}
+];
+const kpiData=[
+  {v:'14',s:'M',l:'ACV Contributed',pre:'$'},
+  {v:'300',s:'+',l:'Deals Closed'},
+  {v:null,s:null,l:'All Star Ranger',badge:'Lifelong Learner'},
+  {v:'5',s:'×',l:'Salesforce Certified'},
+  {v:'3',s:'×',l:'Trail Guide — Andrew · Srishti · Simon'},
+  {v:null,s:null,l:'Agentblazer Legend 2026',badge:'Trailhead'}
+];
+
+var s4DotTimer=null;
+function stopS4Dot(){if(s4DotTimer){clearTimeout(s4DotTimer);s4DotTimer=null;}var old=document.getElementById('tl-dot-el');if(old)old.remove();}
+
+function initS4(){
+  stopS4Dot();
+  const tl=document.getElementById('tl');
+  if(tl.childElementCount)return;
+  tlData.forEach((d,i)=>{
+    const row=document.createElement('div');row.className='tl-row';
+    row.innerHTML=`<div class="tl-spine"><div class="tl-dot">${d.e}</div><div class="tl-line"></div></div><div class="tl-content"><div class="tl-label">${d.l}</div><div class="tl-desc">${d.d}</div></div>`;
+    tl.appendChild(row);
+    setTimeout(()=>row.classList.add('show'),200+i*280);
+  });
+  // One-time dot travel after all pills are visible
+  const allPillsDelay=200+(tlData.length-1)*280+400;
+  s4DotTimer=setTimeout(()=>{
+    const dot=document.createElement('div');dot.className='tl-travel';dot.id='tl-dot-el';
+    document.body.appendChild(dot);
+    const lines=tl.querySelectorAll('.tl-line');
+    const segDur=900;
+    let seg=0;
+    function nextSeg(){
+      if(!document.getElementById('tl-dot-el'))return;
+      if(seg>=lines.length){dot.remove();return;}
+      const r=lines[seg].getBoundingClientRect();
+      const x=r.left+r.width/2;
+      const startY=r.top;
+      const endY=r.bottom;
+      const t0=performance.now();
+      function frame(now){
+        if(!document.getElementById('tl-dot-el'))return;
+        const p=Math.min((now-t0)/segDur,1);
+        const ease=p<0.5?2*p*p:-1+(4-2*p)*p;
+        dot.style.left=x+'px';
+        dot.style.top=(startY+(endY-startY)*ease)+'px';
+        if(p<1){requestAnimationFrame(frame);}
+        else{seg++;s4DotTimer=setTimeout(nextSeg,0);}
+      }
+      requestAnimationFrame(frame);
+    }
+    nextSeg();
+  },allPillsDelay);
+  const kc=document.getElementById('kpi-cards');
+  if(kc.childElementCount)return;
+  kpiData.forEach((k,i)=>{
+    const c=document.createElement('div');c.className='kpi-dc';
+    const valEl=document.createElement('div');valEl.className='kpi-val';
+    if(k.v!==null){
+      const sp=document.createElement('span');
+      if(k.pre){const pre=document.createTextNode(k.pre);valEl.appendChild(pre);}
+      sp.textContent='0'+k.s;valEl.appendChild(sp);
+    } else {
+      valEl.innerHTML='<span>'+k.l+'</span>';
+    }
+    const lblEl=document.createElement('div');lblEl.className='kpi-lbl';
+    lblEl.textContent=k.badge?k.badge:k.l;
+    c.appendChild(valEl);c.appendChild(lblEl);
+    c.style.opacity='0';c.style.transform='translateY(10px)';c.style.transition='opacity 400ms,transform 400ms';
+    kc.appendChild(c);
+    setTimeout(()=>{c.style.opacity='1';c.style.transform='none';
+      if(k.v){countUp(valEl.querySelector('span'),0,parseInt(k.v),k.s,800);}
+    },300+i*200);
+  });
+}
+
+function countUp(el,from,to,suffix,dur){
+  const t0=performance.now();
+  function step(now){
+    const p=Math.min((now-t0)/dur,1);
+    const ease=p<0.5?2*p*p:-1+(4-2*p)*p;
+    el.textContent=(k=>k===to?to:Math.floor(from+(to-from)*ease))(Math.floor(from+(to-from)*ease))+suffix;
+    if(p<1)requestAnimationFrame(step);else el.textContent=to+suffix;
+  }
+  requestAnimationFrame(step);
+}
+
+/* ─── SLIDE 5 ─────────────────────────────────────────── */
+function initS5(){
+  document.querySelectorAll('#why-pts .rp').forEach((el,i)=>
+    setTimeout(()=>el.classList.add('show'),300+i*300));
+}
+
+/* ─── SLIDES 6/7/8 SHARED REVEAL ENGINE ──────────────── */
+var qChevs=[];
+function cleanQClevs(){
+  qChevs.forEach(c=>c.remove());
+  qChevs=[];
+}
+
+function placeChev(elId){
+  const el=document.getElementById(elId);
+  if(!el)return null;
+  const r=el.getBoundingClientRect();
+  const c=document.createElement('div');
+  c.className='q-chev';
+  c.style.left=(r.left+r.width/2)+'px';
+  c.style.top=(r.top+r.height/2)+'px';
+  c.textContent='›';
+  document.body.appendChild(c);
+  qChevs.push(c);
+  return c;
+}
+
+function initClickReveal(tiles){
+  // tiles: array of {id, reveal fn}
+  // First tile auto-reveals, Q2-Q4 need clicks
+  cleanQClevs();
+  tiles.forEach(t=>{
+    const el=document.getElementById(t.id);
+    if(el)el.classList.remove('show');
+    if(t.reset)t.reset();
+  });
+  // Auto-reveal Q1
+  tiles[0].reveal();
+  // Place chevrons on Q2, Q3, Q4 after transition settles
+  var pending=tiles.slice(1).map(t=>({...t,chev:null}));
+  setTimeout(()=>{ pending.forEach(p=>{ p.chev=placeChev(p.id); }); }, 430);
+  var step=0;
+  function onAdvance(e){
+    if(e.key&&e.key!=='ArrowRight'&&e.key!=='ArrowDown'&&e.key!==' ')return;
+    if(step<pending.length){
+      e.stopImmediatePropagation();
+      if(pending[step].chev)pending[step].chev.remove();
+      pending[step].reveal();
+      step++;
+    }
+    if(step>=pending.length){
+      document.removeEventListener('keydown',onAdvance,true);
+      document.removeEventListener('click',onAdvance,true);
+    }
+  }
+  document.addEventListener('keydown',onAdvance,true);
+  document.addEventListener('click',onAdvance,true);
+}
+
+/* ─── SLIDE 6 — LC STORY ─────────────────────────────── */
+function initS6(){
+  initClickReveal([
+    {id:'s6t0', reveal:()=>document.getElementById('s6t0').classList.add('show')},
+    {id:'s6t1', reveal:()=>document.getElementById('s6t1').classList.add('show')},
+    {id:'s6t2', reveal:()=>document.getElementById('s6t2').classList.add('show')},
+    {id:'s6t3', reveal:()=>document.getElementById('s6t3').classList.add('show')},
+  ]);
+}
+
+/* ─── SLIDE 7 — LEADER ───────────────────────────────── */
+function initS7(){
+  var cfg=[
+    {id:'s7t0',tx:'-60px'},{id:'s7t1',tx:'60px'},
+    {id:'s7t2',tx:'-60px'},{id:'s7t3',tx:'60px'}
+  ];
+  cfg.forEach(c=>{
+    const el=document.getElementById(c.id);
+    if(el)el.style.transform='translateX('+c.tx+')';
+  });
+  initClickReveal(cfg.map(c=>({
+    id:c.id,
+    reveal:()=>document.getElementById(c.id).classList.add('show')
+  })));
+}
+
+/* ─── SLIDE 8 — PLAN/CULTURE ─────────────────────────── */
+function initS8(){
+  initClickReveal([
+    {id:'s8t0', reveal:()=>document.getElementById('s8t0').classList.add('show')},
+    {id:'s8t1', reveal:()=>document.getElementById('s8t1').classList.add('show')},
+    {id:'s8t2', reveal:()=>document.getElementById('s8t2').classList.add('show')},
+    {id:'s8t3', reveal:()=>document.getElementById('s8t3').classList.add('show')},
+  ]);
+}
+
+/* ─── SLIDE 9 — EXPONENTIAL CHART ────────────────────── */
+var step = 0;
+function setNextDot(idx) {
+  for (var j = 0; j < 4; j++) document.getElementById('dot' + j).classList.remove('dot-next');
+  if (idx < 4) document.getElementById('dot' + idx).classList.add('dot-next');
+}
+
+for (var i = 0; i < 4; i++) {
+  (function(idx) {
+    document.getElementById('dot' + idx).addEventListener('click', function() {
+      if (idx !== step) return;
+      document.getElementById('tile' + idx).style.opacity = '1';
+      animateSegment('seg' + idx);
+      document.getElementById('dot' + idx).classList.remove('dot-next');
+      document.getElementById('dot' + idx).classList.add('active');
+      step++;
+      setNextDot(step);
+    });
+  })(i);
+}
+
+function animateSegment(id) {
+  var path = document.getElementById(id);
+  path.style.display = 'block';
+  var len = path.getTotalLength();
+  path.style.strokeDasharray = len;
+  path.style.strokeDashoffset = len;
+  path.getBoundingClientRect();
+  path.style.transition = 'stroke-dashoffset 0.6s ease';
+  path.style.strokeDashoffset = '0';
+}
+
+function initS9() {
+  step = 0;
+  for (var i = 0; i < 4; i++) {
+    document.getElementById('dot' + i).classList.remove('active', 'dot-next');
+    document.getElementById('tile' + i).style.opacity = '0';
+    var seg = document.getElementById('seg' + i);
+    seg.style.display = 'none';
+    seg.style.transition = 'none';
+    seg.style.strokeDasharray = '';
+    seg.style.strokeDashoffset = '';
+  }
+  setNextDot(0);
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+  setNextDot(0);
+});
+
+
+/* ─── SLIDE 15 ────────────────────────────────────────── */
+function initS15(){
+  document.querySelectorAll('#acct-grid .ac').forEach((el,i)=>
+    setTimeout(()=>el.classList.add('show'),150+i*150));
+}
+
+/* ─── SLIDE 12 — WHY ME ──────────────────────────────── */
+function initS12(){
+  var pills = [0,1,2,3,4,5].map(function(i){ return document.getElementById('wmp'+i); });
+  var prompt = document.getElementById('wm-prompt');
+  var mic = document.getElementById('wm-mic');
+  var micRevealed = false;
+
+  pills.forEach(function(p){ p.classList.remove('show'); });
+  prompt.style.display = 'none';
+  mic.classList.remove('show');
+  mic.style.display = 'none';
+
+  pills.forEach(function(p, i){
+    setTimeout(function(){ p.classList.add('show'); }, 200 + i * 600);
+  });
+  setTimeout(function(){ prompt.style.display = 'flex'; }, 200 + 6 * 600);
+
+  function revealMic(){
+    if(micRevealed) return;
+    micRevealed = true;
+    prompt.style.display = 'none';
+    mic.style.display = 'block';
+    requestAnimationFrame(function(){ requestAnimationFrame(function(){ mic.classList.add('show'); }); });
+    document.removeEventListener('keydown', onKey, true);
+    prompt.removeEventListener('click', onPromptClick);
+  }
+
+  function onKey(e){
+    if(e.key==='ArrowRight'||e.key==='ArrowDown'||e.key===' '){
+      if(!micRevealed){ e.stopImmediatePropagation(); revealMic(); }
+    }
+  }
+
+  function onPromptClick(){ revealMic(); }
+
+  document.addEventListener('keydown', onKey, true);
+  prompt.addEventListener('click', onPromptClick);
+}
+
+/* ─── INIT ────────────────────────────────────────────── */
+buildDots();
+updateUI();
+</script>
+</body>
+</html>
